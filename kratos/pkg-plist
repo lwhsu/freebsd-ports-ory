@@ -1,0 +1,3 @@
+bin/kratos
+@sample etc/kratos/kratos.yml.sample
+@sample etc/kratos/identity.schema.json.sample

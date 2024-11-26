@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# PROVIDE: hydra
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+#
+# Add the following line to /etc/rc.conf to enable hydra:
+#
+#  hydra_enable="YES"
+#  # optional
+#  hydra_config="%%PREFIX%%/etc/hydra/hydra.yml"
+#  hydra_flags="-c ${hydra_config}"
+#
+# This scripts takes one of the following commands:
+#
+#   start stop restart migrate
+#
+
+. /etc/rc.subr
+
+name="hydra"
+rcvar="${name}_enable"
+
+pidfile="/var/run/hydra.pid"
+procname="%%PREFIX%%/bin/hydra"
+extra_commands="migrate"
+command="/usr/sbin/daemon"
+
+start_cmd="hydra_start"
+migrate_cmd="hydra_migrate"
+
+load_rc_config "$name"
+: ${hydra_enable:="NO"}
+: ${hydra_config:="%%PREFIX%%/etc/hydra/hydra.yml"}
+: ${hydra_flags:="-c ${hydra_config}"}
+
+required_files="${hydra_config}"
+
+hydra_start()
+{
+    ${command} -f -p ${pidfile} -t ${name} ${procname} ${hydra_flags} serve all
+}
+
+hydra_migrate()
+{
+    ${procname} ${hydra_flags} migrate sql -e --yes
+}
+
+run_rc_command "$1"

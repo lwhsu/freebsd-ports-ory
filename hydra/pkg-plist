@@ -1,0 +1,2 @@
+bin/hydra
+@sample etc/hydra/hydra.yml.sample

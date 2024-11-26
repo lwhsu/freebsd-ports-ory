@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# PROVIDE: kratos
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+#
+# Add the following line to /etc/rc.conf to enable kratos:
+#
+#  kratos_enable="YES"
+#  # optional
+#  kratos_flags="-w -s -m fast"
+#  kratos_migrate_flags="--encoding=utf-8 --lc-collate=C"
+#
+# This scripts takes one of the following commands:
+#
+#   start stop restart migrate
+#
+
+. /etc/rc.subr
+
+name="kratos"
+rcvar="${name}_enable"
+
+pidfile="/var/run/${name}.pid"
+procname="%%PREFIX%%/bin/kratos"
+extra_commands="migrate"
+command="/usr/sbin/daemon"
+
+start_cmd="kratos_start"
+migrate_cmd="kratos_migrate"
+
+load_rc_config "$name"
+: ${kratos_enable:="NO"}
+: ${kratos_config:="%%PREFIX%%/etc/kratos/kratos.yml"}
+: ${kratos_flags:="-c ${kratos_config}"}
+
+required_files="${kratos_config}"
+
+kratos_start()
+{
+    ${command} -f -p ${pidfile} -t ${name} ${procname} ${kratos_flags} serve
+}
+
+kratos_migrate()
+{
+    ${procname} ${kratos_flags} migrate sql -e --yes
+}
+
+run_rc_command "$1"
