@@ -18,15 +18,17 @@ USE_RC_SUBR=	hydra
 
 GH_ACCOUNT=	ory
 GO_MODULE=	github.com/ory/hydra/v2
-GO_BUILDFLAGS=	-ldflags="${STRIP} -w ${BUILD_TAGS}"
+GO_BUILDFLAGS=	-ldflags="-X github.com/ory/hydra/v2/driver/config.Version=${PORTVERSION}"
 
 post-fetch:
 	@${ECHO_MSG} "Fetching ${GO_MODNAME}/internal/httpclient dependency";
-	(cd ${DISTDIR}/${DIST_SUBDIR}; [ -e internal/httpclient/go.mod ] || ${MKDIR} internal/httpclient; \
-		tar -zxf ory-hydra-v${PORTVERSION}_GH0.tar.gz ${PORTNAME}-${PORTVERSION}/internal/httpclient/go.mod; \
-		${CP} ${PORTNAME}-${PORTVERSION}/internal/httpclient/go.mod internal/httpclient/go.mod)
+	(cd ${DISTDIR}/${DIST_SUBDIR}; [ -e internal/httpclient/go.mod ] || (\
+		${MKDIR} internal/httpclient/; \
+		${TAR} -zxf ${DISTNAME}${EXTRACT_SUFX} ${PORTNAME}-${PORTVERSION}/internal/httpclient/go.mod; \
+		${CP} ${PORTNAME}-${PORTVERSION}/internal/httpclient/go.mod internal/httpclient/go.mod))
 
 post-extract:
+	@${MKDIR} ${GO_WRKSRC}/internal/httpclient;
 	@${CP} -r ${WRKDIR}/${PORTNAME}-${PORTVERSION}/internal/httpclient ${GO_WRKSRC}/internal;
 
 post-install:

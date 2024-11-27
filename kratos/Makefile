@@ -18,13 +18,14 @@ USE_RC_SUBR=	kratos
 
 GH_ACCOUNT=	ory
 GO_MODULE=	github.com/ory/kratos
-GO_BUILDFLAGS=	-ldflags="${STRIP} -w ${BUILD_TAGS}"
+GO_BUILDFLAGS=	-ldflags="-X github.com/ory/kratos/driver/config.Version=${PORTVERSION}"
 
 post-fetch:
 	@${ECHO_MSG} "Fetching ${GO_MODNAME}/internal/client-go dependency";
-	(cd ${DISTDIR}/${DIST_SUBDIR}; [ -e internal/client-go/go.mod ] || ${MKDIR} internal/client-go; \
-		tar -zxf ory-kratos-v${PORTVERSION}_GH0.tar.gz ${PORTNAME}-${PORTVERSION}/internal/client-go/go.mod; \
-		${CP} ${PORTNAME}-${PORTVERSION}/internal/client-go/go.mod internal/client-go/go.mod)
+	(cd ${DISTDIR}/${DIST_SUBDIR}; [ -e internal/client-go/go.mod ] || (\
+		${MKDIR} internal/client-go; \
+		${TAR} -zxf ${DISTNAME}${EXTRACT_SUFX} ${PORTNAME}-${PORTVERSION}/internal/client-go/go.mod; \
+		${CP} ${PORTNAME}-${PORTVERSION}/internal/client-go/go.mod internal/client-go/go.mod))
 
 post-extract:
 	@${CP} -r ${WRKDIR}/${PORTNAME}-${PORTVERSION}/internal/client-go ${GO_WRKSRC}/internal;
