@@ -1,7 +1,7 @@
-TIMESTAMP = 1723102802
-SHA256 (go/net_hydra/ory-hydra-v2.2.0_GH0/v2.2.0.mod) = 4e28750ccc3f76e0ca0d6196310c6c6d60ab54ed306ba8386cee7949c352aa81
-SIZE (go/net_hydra/ory-hydra-v2.2.0_GH0/v2.2.0.mod) = 11993
-SHA256 (go/net_hydra/ory-hydra-v2.2.0_GH0/v2.2.0.zip) = f932026775be596a32bd2042c2b63615916ec7beaf06c5973fa79126a48adc72
-SIZE (go/net_hydra/ory-hydra-v2.2.0_GH0/v2.2.0.zip) = 6136421
-SHA256 (go/net_hydra/ory-hydra-v2.2.0_GH0/ory-hydra-v2.2.0_GH0.tar.gz) = ee01154238e83e1e63898fcfc9aea04ece1b4f73c791e3c8fe641bad5348be8c
-SIZE (go/net_hydra/ory-hydra-v2.2.0_GH0/ory-hydra-v2.2.0_GH0.tar.gz) = 4782215
+TIMESTAMP = 1737528455
+SHA256 (go/net_hydra/ory-hydra-v2.3.0_GH0/v2.3.0.mod) = 2d52b0490d46106b92d4f3db611a432b650f7870926d0edcb96872cc9e168adb
+SIZE (go/net_hydra/ory-hydra-v2.3.0_GH0/v2.3.0.mod) = 12022
+SHA256 (go/net_hydra/ory-hydra-v2.3.0_GH0/v2.3.0.zip) = 48c5ce894c7e5051e5c79f4f605f463f7f105d804ca39bc1b1fc703296727089
+SIZE (go/net_hydra/ory-hydra-v2.3.0_GH0/v2.3.0.zip) = 6149633
+SHA256 (go/net_hydra/ory-hydra-v2.3.0_GH0/ory-hydra-v2.3.0_GH0.tar.gz) = e2eae51a07ee89acb5ce4cfcf9c319714cc6bbb7c999b97488eb202d29255ce1
+SIZE (go/net_hydra/ory-hydra-v2.3.0_GH0/ory-hydra-v2.3.0_GH0.tar.gz) = 4790841
